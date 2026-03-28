@@ -34,3 +34,7 @@ npm-debug.log*
 
 # Kubernetes secrets
 *.secret.yaml
+.terraform/
+.terraform.lock.hcl
+terraform.tfstate
+terraform.tfstate.backup
