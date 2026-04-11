@@ -1,12 +1,13 @@
-name: Build and Push to Docker Hub
+name: CI/CD Build and Update
 
 on:
   push:
     branches: [ "main" ]
 
 jobs:
-  push_to_registry:
-    name: Push Docker images to Docker Hub
+  # JOB 1: Budowanie i wysyłanie obrazów
+  build-and-push:
+    name: Build and Push Docker Images
     runs-on: ubuntu-latest
     steps:
       - name: Check out the repo
@@ -18,7 +19,6 @@ jobs:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
 
-      # Budowanie Backend
       - name: Build and push Backend
         uses: docker/build-push-action@v5
         with:
@@ -27,7 +27,6 @@ jobs:
           push: true
           tags: ${{ secrets.DOCKERHUB_USERNAME }}/backend-app:${{ github.run_id }}
 
-      # Budowanie Frontend
       - name: Build and push Frontend
         uses: docker/build-push-action@v5
         with:
@@ -35,13 +34,20 @@ jobs:
           file: ./frontend/Dockerfile 
           push: true
           tags: ${{ secrets.DOCKERHUB_USERNAME }}/frontend-app:${{ github.run_id }}
+          
+  # JOB 2: Aktualizacja Helm Charts
+  update-helm:
+    name: Update Helm Charts
+    needs: build-and-push
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out the repo
+        uses: actions/checkout@v4
 
-      # Aktualizacja wartości w Helm
       - name: Update Helm Values
         run: |
           FILE_PATH="helm/todo-app-chart/values.yaml"
           sed -i "/backend:/,/imageTag:/ s/imageTag: .*/imageTag: \"${{ github.run_id }}\"/" $FILE_PATH
-          
           sed -i "/frontend:/,/imageTag:/ s/imageTag: .*/imageTag: \"${{ github.run_id }}\"/" $FILE_PATH
 
       - name: Commit and push changes
