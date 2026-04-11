@@ -1,0 +1,5 @@
+backend:
+  imageTag: "v1"
+
+frontend:
+  imageTag: "v1"
