@@ -36,11 +36,9 @@ Proces dostarczania oprogramowania podzielony jest na dwa etapy:
 ---
 
 
+https://github.com/user-attachments/assets/9333d8e0-3aa2-42ab-83a1-f17c399b8949
 
-1. **Terraform Apply:** Tworzy fundamenty: VPC, EKS i niezbędne role IAM.
-2. **ALB Controller:** Instalacja kontrolera wewnątrz EKS (np. przez Helm), aby k8s mógł zarządzać AWS Load Balancerem.
-3. **Argo CD Setup:** Wdrożenie kontrolera Argo CD na klaster i podpięcie tego repozytorium.
-4. **App Push:** Każda zmiana w kodzie aplikacji powoduje przebudowanie obrazu, a Argo CD natychmiastowo wdraża nową wersję na produkcję.
+
 
 ---
 **Author:** [Karol301](https://github.com/Karol301)
