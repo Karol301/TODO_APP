@@ -1,4 +1,4 @@
-const API = "http://localhost:8000"
+const API = "http://todo-app.local"
 
 async function loadTasks(){
 
