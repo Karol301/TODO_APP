@@ -3,14 +3,21 @@ kind: Ingress
 metadata:
   name: todo-ingress
   annotations:
-      alb.ingress.kubernetes.io/scheme: internet-facing
-      alb.ingress.kubernetes.io/target-type: ip
+    alb.ingress.kubernetes.io/scheme: internet-facing
+    alb.ingress.kubernetes.io/target-type: ip
 spec:
   ingressClassName: alb
   rules:
   - host: todo-app.local
     http:
       paths:
+      - path: /todos
+        pathType: Prefix
+        backend:
+          service:
+            name: backend-service
+            port:
+              number: 8000
       - path: /
         pathType: Prefix
         backend:
@@ -18,4 +25,3 @@ spec:
             name: frontend-service 
             port:
               number: 80
-      
