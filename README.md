@@ -35,9 +35,7 @@ Proces dostarczania oprogramowania podzielony jest na dwa etapy:
      
 ---
 
-
-https://github.com/user-attachments/assets/9333d8e0-3aa2-42ab-83a1-f17c399b8949
-
+![Video Project 3](https://github.com/user-attachments/assets/49d631c0-c527-434a-a266-b2e279898be4)
 
 
 ---
