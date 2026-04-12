@@ -3,6 +3,11 @@ name: CI/CD Build and Update
 on:
   push:
     branches: [ "main" ]
+    paths-ignore:
+      - 'terraform/**'
+      - 'helm/**'
+      - '**.md'
+      - 'k8s/**'
 
 jobs:
   # JOB 1: Budowanie i wysyłanie obrazów
