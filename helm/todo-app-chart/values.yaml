@@ -1,5 +1,5 @@
 backend:
-  imageTag: "24307558352"
+  imageTag: "24310115988"
 
 frontend:
-  imageTag: "24307558352"
+  imageTag: "24310115988"
